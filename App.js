@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -17,7 +17,7 @@ import {
   Button,
   Pressable,
   TextInput,
-  FlatList
+  FlatList,
 } from 'react-native';
 
 import {
@@ -28,37 +28,28 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-
 import ToggleView from './custom/ToggleView';
 
-import fs from 'react-native-fs';
-
-
-const Playlist = ({ id, tittle }) => (
+const Playlist = ({id, tittle}) => (
   <Pressable>
     <Text>{tittle}</Text>
   </Pressable>
 );
 
-const Song = ({ id, tittle}) => (
+const Song = ({id, tittle}) => (
   <Pressable>
     <Text>{tittle}</Text>
   </Pressable>
 );
-
 
 const App: () => React$Node = () => {
+  const [playlistList, setPlaylistList] = useState([]);
+  const [songList, setSongList] = useState([]);
 
-
-  const [playlistList, setPlaylistList] = useState([
-    
-  ])
-  const [songList, setSongList] = useState([
- 
-  ])
-  
   const [hide, setLibraryView] = useState(false);
-  const [playlistLabel, setPlaylistLabel] = useState((playlistList === null) ? null : playlistList[0]);
+  const [playlistLabel, setPlaylistLabel] = useState(
+    playlistList === null ? null : playlistList[0],
+  );
 
   return (
     <>
@@ -66,57 +57,40 @@ const App: () => React$Node = () => {
 
       {/* Global View */}
       <SafeAreaView style={styles.glob}>
-
         {/* Drawer Library View */}
         <ToggleView hide={hide} style={styles.libraryView}>
-          
           {/* Debug open/close toggle */}
           <Text>
-            Status: {hide ? "Open library view" : "Close library view"}
-          </Text> 
-
+            Status: {hide ? 'Open library view' : 'Close library view'}
+          </Text>
 
           <View style={styles.playlistList}>
-            <FlatList>
-              data={playlistList}
-            </FlatList>
+            <FlatList>data={playlistList}</FlatList>
           </View>
           {/* Set up drawer library component from scratch here*/}
-
         </ToggleView>
 
-        <Pressable 
-          onPress={ () => setLibraryView(!hide)}
+        <Pressable
+          onPress={() => setLibraryView(!hide)}
           style={styles.viewBtn}
           tittle=">"
           accessibilityLabel="Library Display Toggle"
         />
 
-
         {/* Static Content View */}
         <View style={styles.contentView}>
-          <Text>
-            Music search
-          </Text>
-          <TextInput style={styles.search}/>
+          <Text>Music search</Text>
+          <TextInput style={styles.search} />
 
-          <Text>
-            {playlistLabel}
-          </Text>
+          <Text>{playlistLabel}</Text>
           <View style={styles.playlistView}>
-            <Text>
-              You are using: {playlistLabel}
-            </Text>
+            <Text>You are using: {playlistLabel}</Text>
             <View style={styles.songList}>
-              <Text>
-                How much space does the list take
-              </Text>
+              <Text>How much space does the list take</Text>
             </View>
           </View>
           {/* Inject playlist component here */}
-
         </View>
-
       </SafeAreaView>
     </>
   );
@@ -160,40 +134,39 @@ const styles = StyleSheet.create({
     textAlign: 'right',
   },
   glob: {
-    flexDirection: "row",
-    flex:1
+    flexDirection: 'row',
+    flex: 1,
   },
   viewBtn: {
     flex: 0.04,
     backgroundColor: 'purple',
-    alignItems: 'stretch'
+    alignItems: 'stretch',
   },
   libraryView: {
-    display: "flex",
+    display: 'flex',
     flex: 0.5,
-    flexDirection: "column",
-    backgroundColor: 'skyblue'
+    flexDirection: 'column',
+    backgroundColor: 'skyblue',
   },
   contentView: {
     flex: 1,
-    alignItems: "stretch",
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    margin: 5
+    alignItems: 'stretch',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    margin: 5,
   },
   playlistView: {
-    flex: 1
+    flex: 1,
   },
   songList: {
     flex: 1,
     margin: 10,
-    backgroundColor: "gray"
+    backgroundColor: 'gray',
   },
   playlistList: {
     flex: 1,
-    margin: 10
-  }
-
+    margin: 10,
+  },
 });
 
 export default App;

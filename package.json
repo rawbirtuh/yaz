@@ -6,13 +6,14 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
+    "windows": "react-native run-windows",
     "test": "jest",
     "lint": "eslint ."
   },
   "dependencies": {
     "react": "16.13.1",
     "react-native": "0.63.2",
-    "react-native-fs": "^2.16.6",
+    "react-native-fs": "git+https://github.com/status-im/react-native-fs.git",
     "react-native-windows": "^0.63.0-0"
   },
   "devDependencies": {
